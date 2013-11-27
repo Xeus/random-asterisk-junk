@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.1.0-rc.1.min.css" type="text/css" />
+    <title>Gotta Take This</title>
+    <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery-1.7.1.min"></script>
+    <script type="text/javascript" charset="utf-8">
+	$(document).bind("mobileinit", function() {
+		// Make your jQuery Mobile framework configuration changes here!
+		$.support.cors = true;
+		$.mobile.allowCrossDomainPages = true;
+		$.mobile.defaultPageTransition = 'none'; // docs say defaultTransition but are wrong!
+	}); //
+</script>
+<script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery.mobile-1.1.0-rc.1.min"></script>
+	  <script type="text/javascript" charset="utf-8" src="js/phonegap-1.4.1.js"></script>
+	  <script type="text/javascript" charset="utf-8">
+      
+        var onDeviceReady = function() {
+        }; //
+
+        function init() {
+            document.addEventListener("deviceready", onDeviceReady, true);
+        }   
+	</script>  
+	<style type="text/css">
+		BODY { width: 100%; height: 100%; margin: 0px; padding: 0px; }
+		#header { height: 0; margin: 0px; padding: 0px; }
+		div[data-role="content"] { margin: 0px; padding: 0px; }
+	</style>
+  </head>
+<body onload="init();" id="stage" data-theme="a">
+
+<div data-role="header"></div>
+
+<div data-role="page" id="mainPage" data-theme="a">
+
+<div data-role="content" data-theme="a" STYLE="width: 100%;">
+
+<div style="top: 40%; width: 100%; position: absolute;"><CENTER><a id="help"><img src="img/lifesaver.png" width=128 height=128 alt="SAVE ME FROM THIS. NOW."></a></CENTER></div>
+
+</div> <!-- /content -->
+
+</div> <!-- /page -->
+
+<script type="text/javascript">
+
+$(function() {
+	init();
+	$("#help").click(function() {
+		$.mobile.loadPage("http://itp.nyu.edu/~vt520/sinatra/main_agi/gottatakethis", {
+        	reloadPage : true
+        });
+		console.log("clicked on button");
+	});
+	$("button").button();
+});
+
+</script>
+
+</body>
+</html>

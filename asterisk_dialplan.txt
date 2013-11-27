@@ -1,0 +1,38 @@
+[vt520_week2hw]
+;exten => s,1,Wait(1)
+;exten => s,n,SayDigits(${CALLERID(num)})
+;   same => n,Playback(vm-num-i-have)
+;   same => n,SayDigits(9725107983)
+; use Archer's joke voicemail sound
+;exten => s,n,Playback(demo-echotest)
+;exten => s,n,Echo()
+;exten => s,n,Playback(demo-echodone)
+;exten => s,n,Hangup()
+
+[vt520]
+exten => s,1,Wait(1)
+;exten => s,n,Playback(tt-weasels)
+exten => s,n,Playback(/home/vt520/asterisk_sounds/archer_voicemail)
+exten => s,n,Goto(vt520-vm,s,1)
+
+[vt520-vm]
+; vm-review: Press 1 to accept this recording. Press 2 to listen to it. Press 3 to re-record your message.
+exten => s,1,Voicemail(112@vt520_voicemail, u)
+;exten => s,n,Record(asterisk-recording%d:ulaw)
+exten => s,n,Playback(vm-review)
+;exten => s,n,Festival('Press 1 to continue or 2 to change your message')
+exten => s,n,WaitExten(10)
+exten => s,n,Hangup()
+;voicemail will go the a extension if * is hit during voicemail app
+exten => a,1,VoiceMailMain(112@vt520_voicemail)
+exten => a,n,Hangup()
+
+exten => 1,1,Playback(queue-quantity1)
+exten => 1,n,SayNumber(18)
+exten => 1,n,Playback(queue-quantity2)
+exten => 1,n,Hangup()
+
+exten => 2,1,Playback(${RECORDED_FILE})
+exten => 2,n,Playback(vm-review)
+exten => 2,n,WaitExten(10)
+exten => 2,n,Goto(vt520-vm,s,1)
